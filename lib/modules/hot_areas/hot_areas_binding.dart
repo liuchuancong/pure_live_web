@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pure_live/modules/hot_areas/hot_areas_controller.dart';
+import 'package:pure_live_web/modules/hot_areas/hot_areas_controller.dart';
 
 class HotAreasBinding extends Binding {
   @override

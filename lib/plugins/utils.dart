@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 
 class Utils {
   static Future<bool> showAlertDialog(

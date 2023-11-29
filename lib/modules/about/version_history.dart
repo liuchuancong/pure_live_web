@@ -1,4 +1,4 @@
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 
 class VersionHistoryPage extends StatefulWidget {
   const VersionHistoryPage({super.key});

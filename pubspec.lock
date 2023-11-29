@@ -137,14 +137,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.3.4"
-  dynamic_color:
-    dependency: "direct main"
-    description:
-      name: dynamic_color
-      sha256: "8b8bd1d798bd393e11eddeaa8ae95b12ff028bf7d5998fc5d003488cd5f4ce2f"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.6.8"
   easy_refresh:
     dependency: "direct main"
     description:
@@ -590,7 +582,7 @@ packages:
     source: hosted
     version: "0.27.7"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: "81429e4481e1ccfb51ede496e916348668fd0921627779233bd24cc3ff6abd02"
@@ -890,14 +882,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.4"
-  visibility_detector:
-    dependency: "direct main"
-    description:
-      name: visibility_detector
-      sha256: dd5cc11e13494f432d15939c3aa8ae76844c42b723398643ce9addb88a5ed420
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.4.0+2"
   web:
     dependency: transitive
     description:
@@ -946,6 +930,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.9.4"
+  wifi_ip_details:
+    dependency: "direct main"
+    description:
+      name: wifi_ip_details
+      sha256: f344942f7e690871aaaf2e988cd9219dca5b8f5ab506c721977750b4cee4ead3
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   win32:
     dependency: transitive
     description:

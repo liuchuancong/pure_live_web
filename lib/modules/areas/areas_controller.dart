@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/modules/areas/areas_list_controller.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/modules/areas/areas_list_controller.dart';
 
 class AreasController extends GetxController with GetSingleTickerProviderStateMixin {
   late TabController tabController;

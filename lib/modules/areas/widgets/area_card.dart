@@ -1,5 +1,5 @@
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/routes/app_navigation.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/routes/app_navigation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class AreaCard extends StatelessWidget {
@@ -49,7 +49,6 @@ class AreaCard extends StatelessWidget {
                 elevation: 0,
                 child: CachedNetworkImage(
                   imageUrl: category.areaPic!,
-                  cacheManager: CustomCacheManager.instance,
                   fit: BoxFit.fill,
                   errorWidget: (context, error, stackTrace) => const Center(
                     child: Icon(

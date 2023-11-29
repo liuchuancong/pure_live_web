@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/modules/popular/popular_grid_controller.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/modules/popular/popular_grid_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PopularGridView extends StatefulWidget {

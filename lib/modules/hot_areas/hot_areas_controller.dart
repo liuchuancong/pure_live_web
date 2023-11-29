@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/common/base/base_controller.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/common/base/base_controller.dart';
 
 class HotAreasController extends BaseController {
   final SettingsService settingsController = Get.find<SettingsService>();

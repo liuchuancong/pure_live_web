@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'search_list_view.dart';
 import 'package:flutter/material.dart';
-import 'package:pure_live/core/sites.dart';
-import 'package:pure_live/common/l10n/generated/l10n.dart';
-import 'package:pure_live/modules/search/search_controller.dart' as pure_live;
+import 'package:pure_live_web/core/sites.dart';
+import 'package:pure_live_web/common/l10n/generated/l10n.dart';
+import 'package:pure_live_web/modules/search/search_controller.dart' as pure_live;
 
 class SearchPage extends GetView<pure_live.SearchController> {
   const SearchPage({super.key});

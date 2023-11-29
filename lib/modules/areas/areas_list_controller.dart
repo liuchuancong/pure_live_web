@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/base/base_controller.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/model/live_category.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/model/live_category.dart';
+import 'package:pure_live_web/common/base/base_controller.dart';
 
 class AreasListController extends BasePageController<AppLiveCategory> {
   final Site site;
@@ -9,8 +9,8 @@ class AreasListController extends BasePageController<AppLiveCategory> {
 
   @override
   Future<List<AppLiveCategory>> getData(int page, int pageSize) async {
-    var result = await site.liveSite.getCategores(page, pageSize);
-
+    // var result = await site.liveSite.getCategores(page, pageSize);
+    var result = [];
     return result.map((e) => AppLiveCategory.fromLiveCategory(e)).toList();
   }
 }

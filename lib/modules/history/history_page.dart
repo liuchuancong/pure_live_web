@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HistoryPage extends GetView {
@@ -16,8 +16,8 @@ class HistoryPage extends GetView {
 
     for (final room in settings.historyRooms) {
       try {
-        var newRoom = await Sites.of(room.platform!).liveSite.getRoomDetail(roomId: room.roomId!);
-        settings.updateRoomInHistory(newRoom);
+        // var newRoom = await Sites.of(room.platform!).liveSite.getRoomDetail(roomId: room.roomId!);
+        // settings.updateRoomInHistory(newRoom);
       } catch (e) {
         result = false;
       }

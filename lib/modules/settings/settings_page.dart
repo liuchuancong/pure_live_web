@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:pure_live/modules/settings/danmuset.dart';
-import 'package:pure_live/modules/backup/backup_page.dart';
+import 'package:pure_live_web/modules/settings/danmuset.dart';
+import 'package:pure_live_web/modules/backup/backup_page.dart';
 
 class SettingsPage extends GetView<SettingsService> {
   const SettingsPage({super.key});

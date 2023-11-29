@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:pure_live/common/services/bilibili_account_service.dart';
 
 class SettingsService extends GetxController {
   SettingsService() {
@@ -434,14 +433,6 @@ class SettingsService extends GetxController {
     return true;
   }
 
-  setBilibiliCookit(cookie) {
-    final BiliBiliAccountService biliAccountService = Get.find<BiliBiliAccountService>();
-    if (biliAccountService.cookie.isEmpty || biliAccountService.uid == 0) {
-      biliAccountService.resetCookie(cookie);
-      biliAccountService.loadUserInfo();
-    }
-  }
-
   void fromJson(Map<String, dynamic> json) {
     favoriteRooms.value = json['favoriteRooms'] != null
         ? (json['favoriteRooms'] as List).map<LiveRoom>((e) => LiveRoom.fromJson(jsonDecode(e))).toList()
@@ -481,7 +472,6 @@ class SettingsService extends GetxController {
     themeColorSwitch.value = json['themeColorSwitch'] ?? Colors.blue.hex;
     changeThemeMode(themeModeName.value);
     changeThemeColorSwitch(themeColorSwitch.value);
-    setBilibiliCookit(bilibiliCookie.value);
     changeLanguage(languageName.value);
     changePreferResolution(preferResolution.value);
     changePreferPlatform(preferPlatform.value);

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/modules/search/search_controller.dart' as pure_live;
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/modules/search/search_controller.dart' as pure_live;
 
 class HomeTabletView extends StatelessWidget {
   final Widget body;

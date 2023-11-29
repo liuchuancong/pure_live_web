@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/routes/app_navigation.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/routes/app_navigation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:pure_live/modules/search/search_list_controller.dart';
+import 'package:pure_live_web/modules/search/search_list_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class SearchListView extends StatelessWidget {

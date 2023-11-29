@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/api/setting.dart';
+import 'package:pure_live_web/common/index.dart';
 
 class FavoriteController extends GetxController with GetSingleTickerProviderStateMixin {
   final SettingsService settings = Get.find<SettingsService>();
@@ -46,18 +48,18 @@ class FavoriteController extends GetxController with GetSingleTickerProviderStat
       await const Duration(seconds: 1).delay();
     }
     bool hasError = false;
-    List<Future<LiveRoom>> futures = [];
     if (settings.favoriteRooms.value.isEmpty) return false;
-    for (final room in settings.favoriteRooms.value) {
-      futures.add(Sites.of(room.platform!).liveSite.getRoomDetail(roomId: room.roomId!));
-    }
     try {
-      final rooms = await Future.wait(futures);
-      for (var room in rooms) {
-        settings.updateRoom(room);
+      var refreshFlag = await SettingsRecover().postFavoriteRooms();
+      print(refreshFlag);
+      if (refreshFlag) {
+        var rooms = await SettingsRecover().getFavoriteRooms();
+        settings.favoriteRooms.value = (rooms as List).map<LiveRoom>((e) => LiveRoom.fromJson(jsonDecode(e))).toList();
+        syncRooms();
+        SmartDialog.showToast('刷新成功');
+      } else {
+        SmartDialog.showToast('刷新失败');
       }
-      syncRooms();
-      SmartDialog.showToast('刷新成功');
     } catch (e) {
       hasError = true;
       log(e.toString(), name: 'syncRooms');

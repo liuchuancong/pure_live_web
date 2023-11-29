@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/modules/hot_areas/hot_areas_controller.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/modules/hot_areas/hot_areas_controller.dart';
 
 class HotAreasPage extends GetView<HotAreasController> {
   const HotAreasPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/base/base_controller.dart';
-import 'package:pure_live/core/sites.dart';
+import 'package:pure_live_web/core/sites.dart';
+import 'package:pure_live_web/common/base/base_controller.dart';
 
 class SearchListController extends BasePageController {
   String keyword = "";
@@ -22,16 +22,8 @@ class SearchListController extends BasePageController {
 
   @override
   Future<List> getData(int page, int pageSize) async {
-    if (keyword.isEmpty) {
-      return [];
-    }
-    if (searchMode.value == 1) {
-      // 搜索主播
-      var result = await site.liveSite.searchAnchors(keyword, page: page);
-      return result.items;
-    }
-    var result = await site.liveSite.searchRooms(keyword, page: page);
-    return result.items;
+    if (keyword.isEmpty) {}
+    return [];
   }
 
   void clear() {

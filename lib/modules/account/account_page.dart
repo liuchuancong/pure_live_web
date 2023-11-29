@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pure_live/common/services/bilibili_account_service.dart';
-import 'package:pure_live/modules/account/account_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:pure_live_web/modules/account/account_controller.dart';
 
 class AccountPage extends GetView<AccountController> {
   const AccountPage({super.key});
@@ -29,10 +28,10 @@ class AccountPage extends GetView<AccountController> {
                 height: 36,
               ),
               title: const Text("哔哩哔哩"),
-              subtitle: Text(BiliBiliAccountService.instance.name.value),
-              trailing: BiliBiliAccountService.instance.logined.value
-                  ? const Icon(Icons.logout)
-                  : const Icon(Icons.chevron_right),
+              // subtitle: Text(BiliBiliAccountService.instance.name.value),
+              // trailing: BiliBiliAccountService.instance.logined.value
+              //     ? const Icon(Icons.logout)
+              //     : const Icon(Icons.chevron_right),
               onTap: controller.bilibiliTap,
             ),
           ),

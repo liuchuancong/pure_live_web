@@ -1,16 +1,13 @@
-import 'dart:io';
 import 'dart:async';
 import 'package:get/get.dart';
 import '../search/search_page.dart';
-import 'package:flutter/services.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:move_to_desktop/move_to_desktop.dart';
-import 'package:pure_live/modules/areas/areas_page.dart';
-import 'package:pure_live/modules/home/mobile_view.dart';
-import 'package:pure_live/modules/home/tablet_view.dart';
-import 'package:pure_live/modules/popular/popular_page.dart';
-import 'package:pure_live/modules/favorite/favorite_page.dart';
-import 'package:pure_live/modules/about/widgets/version_dialog.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/modules/areas/areas_page.dart';
+import 'package:pure_live_web/modules/home/mobile_view.dart';
+import 'package:pure_live_web/modules/home/tablet_view.dart';
+import 'package:pure_live_web/modules/popular/popular_page.dart';
+import 'package:pure_live_web/modules/favorite/favorite_page.dart';
+import 'package:pure_live_web/modules/about/widgets/version_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,40 +16,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin, WindowListener {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   Timer? _debounceTimer;
-  @override
-  void initState() {
-    super.initState();
-    // check update overlay ui
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async {
-        // Android statusbar and navigationbar
-        if (Platform.isAndroid) {
-          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            systemNavigationBarColor: Theme.of(context).navigationBarTheme.backgroundColor,
-          ));
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-        } else {
-          windowManager.addListener(this);
-        }
-      },
-    );
-    addToOverlay();
-  }
 
   @override
   void dispose() {
-    if (Platform.isWindows) {
-      windowManager.removeListener(this);
-    }
     super.dispose();
-  }
-
-  @override
-  void onWindowFocus() {
-    setState(() {});
   }
 
   int _selectedIndex = 0;
@@ -106,34 +75,22 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin,
     }
   }
 
-  Future<bool> onBackButtonPressed() async {
-    if (Get.currentRoute != RoutePath.kInitial) {
-      return Future.value(false);
-    }
-    final moveToDesktopPlugin = MoveToDesktop();
-    await moveToDesktopPlugin.moveToDesktop();
-    return Future.value(true);
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BackButtonListener(
-      onBackButtonPressed: onBackButtonPressed,
-      child: LayoutBuilder(
-        builder: (context, constraint) => constraint.maxWidth <= 680
-            ? HomeMobileView(
-                body: bodys[_selectedIndex],
-                index: _selectedIndex,
-                onDestinationSelected: onDestinationSelected,
-                onFavoriteDoubleTap: handMoveRefresh,
-              )
-            : HomeTabletView(
-                body: bodys[_selectedIndex],
-                index: _selectedIndex,
-                onDestinationSelected: onDestinationSelected,
-              ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraint) => constraint.maxWidth <= 680
+          ? HomeMobileView(
+              body: bodys[_selectedIndex],
+              index: _selectedIndex,
+              onDestinationSelected: onDestinationSelected,
+              onFavoriteDoubleTap: handMoveRefresh,
+            )
+          : HomeTabletView(
+              body: bodys[_selectedIndex],
+              index: _selectedIndex,
+              onDestinationSelected: onDestinationSelected,
+            ),
     );
   }
 

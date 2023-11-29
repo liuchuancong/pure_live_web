@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import '../../core/sites.dart';
 import 'package:flutter/material.dart';
-import 'package:pure_live/common/services/settings_service.dart';
-import 'package:pure_live/modules/popular/popular_grid_controller.dart';
+import 'package:pure_live_web/common/services/settings_service.dart';
+import 'package:pure_live_web/modules/popular/popular_grid_controller.dart';
 
 class PopularController extends GetxController with GetSingleTickerProviderStateMixin {
   late TabController tabController;

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
-import 'package:pure_live/plugins/file_recover_utils.dart';
-import 'package:pure_live/modules/auth/utils/constants.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/plugins/file_recover_utils.dart';
+import 'package:pure_live_web/modules/auth/utils/constants.dart';
 
 class BackupPage extends StatefulWidget {
   const BackupPage({super.key});
@@ -134,17 +134,16 @@ class _BackupPageState extends State<BackupPage> {
                   SmartDialog.showToast('请输入下载链接');
                   return;
                 }
-                bool validate = FileRecoverUtils.isUrl(urlEditingController.text);
-                if (!validate) {
-                  SmartDialog.showToast('请输入正确的下载链接');
-                  return;
-                }
+                // bool validate = FileRecoverUtils.isUrl(urlEditingController.text);
+                // if (!validate) {
+                //   SmartDialog.showToast('请输入正确的下载链接');
+                //   return;
+                // }
                 if (textEditingController.text.isEmpty) {
                   SmartDialog.showToast('请输入文件名');
                   return;
                 }
-                await FileRecoverUtils()
-                    .recoverNetworkM3u8Backup(urlEditingController.text, textEditingController.text);
+
                 Get.back();
               },
               child: const Text("确定"),
@@ -157,7 +156,6 @@ class _BackupPageState extends State<BackupPage> {
 
   importFile(String value) {
     if (value == '本地导入') {
-      FileRecoverUtils().recoverM3u8Backup();
       Navigator.of(context).pop();
     } else {
       Navigator.of(context).pop(false);

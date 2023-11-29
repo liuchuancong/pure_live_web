@@ -1,8 +1,7 @@
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:pure_live/modules/auth/utils/constants.dart';
+import 'package:pure_live_web/modules/auth/utils/constants.dart';
 // ignore_for_file: use_build_context_synchronously
-
 
 /// UI component to create password reset form
 class SupaResetPassword extends StatefulWidget {

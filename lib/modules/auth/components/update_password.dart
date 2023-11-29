@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:pure_live/modules/auth/components/supa_reset_password.dart';
+import 'package:pure_live_web/modules/auth/components/supa_reset_password.dart';
 
 class UpdatePassword extends StatelessWidget {
   const UpdatePassword({super.key});

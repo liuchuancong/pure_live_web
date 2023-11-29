@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:pure_live/modules/auth/utils/constants.dart';
-import 'package:pure_live/modules/shield/danmu_shield_controller.dart';
+import 'package:pure_live_web/modules/auth/utils/constants.dart';
+import 'package:pure_live_web/modules/shield/danmu_shield_controller.dart';
 
 class DanmuShieldPage extends GetView<DanmuShieldController> {
   const DanmuShieldPage({super.key});

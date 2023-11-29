@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'areas_grid_view.dart';
 import 'favorite_areas_page.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 
 class AreasPage extends GetView<AreasController> {
   const AreasPage({super.key});

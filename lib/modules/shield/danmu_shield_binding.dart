@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pure_live/modules/shield/danmu_shield_controller.dart';
+import 'package:pure_live_web/modules/shield/danmu_shield_controller.dart';
 
 class DanmuShieldBinding extends Binding {
   @override

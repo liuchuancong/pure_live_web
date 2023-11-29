@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:pure_live/modules/auth/components/supa_email_auth.dart';
+import 'package:pure_live_web/modules/auth/components/supa_email_auth.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

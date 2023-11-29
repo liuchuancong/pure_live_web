@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pure_live/common/index.dart';
+import 'package:pure_live_web/common/index.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({super.key});
@@ -9,22 +9,14 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
-  void uploadUserConifg() {
-    SupaBaseManager().uploadConfig();
-  }
+  void uploadUserConifg() {}
 
-  void downloadUserConifg() {
-    SupaBaseManager().readConfig();
-  }
+  void downloadUserConifg() {}
 
-  void singOut() {
-    SupaBaseManager().signOut();
-  }
+  void singOut() {}
 
   bool isManager() {
-    final AuthController authController = Get.find<AuthController>();
-    if (!authController.isLogin) return false;
-    return SupaBaseManager.supabasePolicy.owner == authController.user.id;
+    return false;
   }
 
   @override
