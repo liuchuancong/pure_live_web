@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'widgets/version_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pure_live_web/common/index.dart';
 
@@ -24,10 +23,6 @@ class _AboutPageState extends State<AboutPage> {
           ListTile(
             title: Text(S.of(context).what_is_new),
             onTap: showNewFeaturesDialog,
-          ),
-          ListTile(
-            title: Text(S.of(context).check_update),
-            onTap: () => showCheckUpdateDialog(context),
           ),
           ListTile(
             title: Text(S.of(context).version),
@@ -66,13 +61,6 @@ class _AboutPageState extends State<AboutPage> {
           ),
         ],
       ),
-    );
-  }
-
-  void showCheckUpdateDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => VersionUtil.hasNewVersion() ? const NewVersionDialog() : const NoNewVersionDialog(),
     );
   }
 

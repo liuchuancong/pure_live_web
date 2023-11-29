@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/model/live_category.dart';
 import 'package:pure_live_web/common/base/base_controller.dart';
@@ -9,9 +11,8 @@ class AreasListController extends BasePageController<AppLiveCategory> {
 
   @override
   Future<List<AppLiveCategory>> getData(int page, int pageSize) async {
-    // var result = await site.liveSite.getCategores(page, pageSize);
-    var result = [];
-    return result.map((e) => AppLiveCategory.fromLiveCategory(e)).toList();
+    var result = await SettingsRecover().getTabData(site.id, ToggleEvent.areaTab.name);
+    return jsonDecode(result).map((e) => AppLiveCategory.fromLiveCategory(e)).toList();
   }
 }
 
@@ -33,5 +34,12 @@ class AppLiveCategory extends LiveCategory {
       id: item.id,
       name: item.name,
     );
+  }
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {};
+    json['id'] = id;
+    json['name'] = id;
+    json['children'] = children.map((LiveArea e) => jsonEncode(e.toJson())).toList();
+    return json;
   }
 }

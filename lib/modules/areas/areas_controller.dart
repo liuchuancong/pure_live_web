@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/modules/areas/areas_list_controller.dart';
 
@@ -25,6 +26,7 @@ class AreasController extends GetxController with GetSingleTickerProviderStateMi
       if (controller.list.isEmpty) {
         controller.loadData();
       }
+      SettingsRecover().toggleTabevent(index, ToggleEvent.areaTab.name);
     });
   }
 

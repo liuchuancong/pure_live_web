@@ -20,21 +20,19 @@ class AccountPage extends GetView<AccountController> {
               textAlign: TextAlign.center,
             ),
           ),
-          Obx(
-            () => ListTile(
-              leading: Image.asset(
-                'assets/images/bilibili_2.png',
-                width: 36,
-                height: 36,
-              ),
-              title: const Text("哔哩哔哩"),
-              // subtitle: Text(BiliBiliAccountService.instance.name.value),
-              // trailing: BiliBiliAccountService.instance.logined.value
-              //     ? const Icon(Icons.logout)
-              //     : const Icon(Icons.chevron_right),
-              onTap: controller.bilibiliTap,
-            ),
-          ),
+          Obx(() => ListTile(
+                leading: Image.asset(
+                  'assets/images/bilibili_2.png',
+                  width: 36,
+                  height: 36,
+                ),
+                title: const Text("哔哩哔哩"),
+                subtitle: Text(controller.biliAccountService.name.value),
+                trailing: controller.biliAccountService.logined.value
+                    ? const Icon(Icons.logout)
+                    : const Icon(Icons.chevron_right),
+                onTap: controller.bilibiliTap,
+              )),
           ListTile(
             leading: Image.asset(
               'assets/images/douyu.png',

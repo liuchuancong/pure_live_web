@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:pure_live_web/modules/settings/danmuset.dart';
@@ -12,14 +12,19 @@ class SettingsPage extends GetView<SettingsService> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        scrolledUnderElevation: screenWidth > 640 ? 0 : null,
         title: Text(S.of(context).settings_title),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          uploadSettings();
+        },
+        child: const Icon(Icons.upload_rounded),
+      ),
       body: ListView(
-        physics: const BouncingScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         children: <Widget>[
           SectionTitle(title: S.of(context).general),
           ListTile(
@@ -130,37 +135,42 @@ class SettingsPage extends GetView<SettingsService> {
             subtitle: const Text("自定义观看喜爱的平台"),
             onTap: () => Get.toNamed(RoutePath.kSettingsHotAreas),
           ),
-          if (Platform.isAndroid)
-            Obx(() => SwitchListTile(
-                  title: Text(S.of(context).double_click_to_exit),
-                  value: controller.doubleExit.value,
-                  activeColor: Theme.of(context).colorScheme.primary,
-                  onChanged: (bool value) => controller.doubleExit.value = value,
-                )),
-          if (Platform.isAndroid)
-            ListTile(
-              title: Text(S.of(context).change_player),
-              subtitle: Text(S.of(context).change_player_subtitle),
-              trailing: Obx(() => Text(controller.playerlist[controller.videoPlayerIndex.value])),
-              onTap: showVideoSetDialog,
-            ),
-          if (Platform.isAndroid)
-            Obx(() => SwitchListTile(
-                  title: Text(S.of(context).enable_codec),
-                  value: controller.enableCodec.value,
-                  activeColor: Theme.of(context).colorScheme.primary,
-                  onChanged: (bool value) => controller.enableCodec.value = value,
-                )),
-          if (Platform.isAndroid)
-            ListTile(
-              title: Text(S.of(context).auto_shutdown_time),
-              subtitle: Text(S.of(context).auto_shutdown_time_subtitle),
-              trailing: Obx(() => Text('${controller.autoShutDownTime} minute')),
-              onTap: showAutoShutDownTimeSetDialog,
-            ),
+          Obx(() => SwitchListTile(
+                title: Text(S.of(context).double_click_to_exit),
+                value: controller.doubleExit.value,
+                activeColor: Theme.of(context).colorScheme.primary,
+                onChanged: (bool value) => controller.doubleExit.value = value,
+              )),
+          ListTile(
+            title: Text(S.of(context).change_player),
+            subtitle: Text(S.of(context).change_player_subtitle),
+            trailing: Obx(() => Text(controller.playerlist[controller.videoPlayerIndex.value])),
+            onTap: showVideoSetDialog,
+          ),
+          Obx(() => SwitchListTile(
+                title: Text(S.of(context).enable_codec),
+                value: controller.enableCodec.value,
+                activeColor: Theme.of(context).colorScheme.primary,
+                onChanged: (bool value) => controller.enableCodec.value = value,
+              )),
+          ListTile(
+            title: Text(S.of(context).auto_shutdown_time),
+            subtitle: Text(S.of(context).auto_shutdown_time_subtitle),
+            trailing: Obx(() => Text('${controller.autoShutDownTime} minute')),
+            onTap: showAutoShutDownTimeSetDialog,
+          ),
         ],
       ),
     );
+  }
+
+  void uploadSettings() async {
+    final res = await SettingsRecover().uploadSettingsConfig();
+    if (res) {
+      SmartDialog.showToast('同步成功');
+    } else {
+      SmartDialog.showToast('同步失败');
+    }
   }
 
   void showThemeModeSelectorDialog() {
@@ -364,7 +374,7 @@ class SettingsPage extends GetView<SettingsService> {
       builder: (context) => AlertDialog(
         title: Text(S.of(context).settings_danmaku_title),
         content: SizedBox(
-          width: Platform.isAndroid ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.width * 0.6,
+          width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import '../search/search_page.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/modules/areas/areas_page.dart';
 import 'package:pure_live_web/modules/home/mobile_view.dart';
 import 'package:pure_live_web/modules/home/tablet_view.dart';
 import 'package:pure_live_web/modules/popular/popular_page.dart';
 import 'package:pure_live_web/modules/favorite/favorite_page.dart';
-import 'package:pure_live_web/modules/about/widgets/version_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,30 +49,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   void onDestinationSelected(int index) {
     setState(() => _selectedIndex = index);
-  }
-
-  Future<void> addToOverlay() async {
-    final overlay = Overlay.maybeOf(context);
-    late OverlayEntry entry;
-    entry = OverlayEntry(
-      builder: (context) => Container(
-        alignment: Alignment.center,
-        color: Colors.black54,
-        child: NewVersionDialog(entry: entry),
-      ),
-    );
-
-    await VersionUtil.checkUpdate();
-    bool isHasNerVersion = Get.find<SettingsService>().enableAutoCheckUpdate.value && VersionUtil.hasNewVersion();
-    if (mounted) {
-      if (overlay != null && isHasNerVersion) {
-        WidgetsBinding.instance.addPostFrameCallback((_) => overlay.insert(entry));
-      } else {
-        if (overlay != null && isHasNerVersion) {
-          overlay.insert(entry);
-        }
-      }
-    }
+    SettingsRecover().toggleTabevent(index, ToggleEvent.bottomTab.name);
   }
 
   @override

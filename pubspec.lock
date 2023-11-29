@@ -930,14 +930,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.9.4"
-  wifi_ip_details:
-    dependency: "direct main"
-    description:
-      name: wifi_ip_details
-      sha256: f344942f7e690871aaaf2e988cd9219dca5b8f5ab506c721977750b4cee4ead3
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.0"
   win32:
     dependency: transitive
     description:

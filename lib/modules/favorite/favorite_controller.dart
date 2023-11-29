@@ -18,7 +18,9 @@ class FavoriteController extends GetxController with GetSingleTickerProviderStat
     super.onInit();
     // 初始化关注页
     syncRooms();
-
+    tabController.addListener(() {
+      SettingsRecover().toggleTabevent(tabController.index, ToggleEvent.online.name);
+    });
     // 监听settings rooms变化
     settings.favoriteRooms.listen((rooms) => syncRooms());
     onRefresh();
@@ -38,7 +40,6 @@ class FavoriteController extends GetxController with GetSingleTickerProviderStat
     onlineRooms.clear();
     offlineRooms.clear();
     onlineRooms.addAll(settings.favoriteRooms.where((room) => room.liveStatus == LiveStatus.live));
-
     offlineRooms.addAll(settings.favoriteRooms.where((room) => room.liveStatus != LiveStatus.live));
   }
 
@@ -51,7 +52,6 @@ class FavoriteController extends GetxController with GetSingleTickerProviderStat
     if (settings.favoriteRooms.value.isEmpty) return false;
     try {
       var refreshFlag = await SettingsRecover().postFavoriteRooms();
-      print(refreshFlag);
       if (refreshFlag) {
         var rooms = await SettingsRecover().getFavoriteRooms();
         settings.favoriteRooms.value = (rooms as List).map<LiveRoom>((e) => LiveRoom.fromJson(jsonDecode(e))).toList();

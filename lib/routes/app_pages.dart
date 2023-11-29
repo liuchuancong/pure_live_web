@@ -5,7 +5,6 @@ import 'package:pure_live_web/modules/home/home_page.dart';
 import 'package:pure_live_web/modules/about/about_page.dart';
 import 'package:pure_live_web/modules/areas/areas_page.dart';
 import 'package:pure_live_web/modules/about/donate_page.dart';
-import 'package:pure_live_web/modules/auth/sign_in_page.dart';
 import 'package:pure_live_web/modules/search/search_page.dart';
 import 'package:pure_live_web/modules/backup/backup_page.dart';
 import 'package:pure_live_web/modules/account/account_bing.dart';
@@ -24,7 +23,6 @@ import 'package:pure_live_web/modules/area_rooms/area_rooms_page.dart';
 import 'package:pure_live_web/modules/hot_areas/hot_areas_binding.dart';
 import 'package:pure_live_web/modules/shield/danmu_shield_binding.dart';
 import 'package:pure_live_web/modules/area_rooms/area_rooms_binding.dart';
-import 'package:pure_live_web/modules/auth/components/update_password.dart';
 
 // auth
 
@@ -37,14 +35,6 @@ class AppPages {
       page: HomePage.new,
       participatesInRootNavigator: true,
       preventDuplicates: true,
-    ),
-    GetPage(
-      name: RoutePath.kSignIn,
-      page: SignInPage.new,
-    ),
-    GetPage(
-      name: RoutePath.kUpdatePassword,
-      page: UpdatePassword.new,
     ),
     GetPage(
       name: RoutePath.kMine,

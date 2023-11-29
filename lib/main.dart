@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/plugins/global.dart';
+import 'common/services/bilibili_account_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main(List<String> args) async {
@@ -13,12 +14,12 @@ void main(List<String> args) async {
   runApp(const MyApp());
 }
 
-void initService() {
+void initService() async {
   Get.put(AuthController());
   Get.put(SettingsService());
   Get.put(FavoriteController());
-  Get.put(PopularController());
-  Get.put(AreasController());
+
+  Get.put(BiliBiliAccountService());
 }
 
 class MyApp extends StatefulWidget {
@@ -34,7 +35,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    SettingsRecover().getSettingsConfig();
+  }
+
+  initData() async {
+    await SettingsRecover().getSettingsConfig();
   }
 
   @override
@@ -45,6 +49,10 @@ class _MyAppState extends State<MyApp> {
       var darkTheme = MyTheme(primaryColor: themeColor).darkThemeData;
       return GetMaterialApp(
         title: '纯粹直播',
+        binds: [
+          Bind.lazyPut(() => PopularController()),
+          Bind.lazyPut(() => AreasController()),
+        ],
         themeMode: SettingsService.themeModes[settings.themeModeName.value]!,
         theme: lightTheme,
         darkTheme: darkTheme,

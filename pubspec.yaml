@@ -70,8 +70,6 @@ dependencies:
   intl: ^0.18.0
   date_format: ^2.0.7
   logger: ^2.0.2+1
-  wifi_ip_details: ^1.0.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -106,6 +104,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+  - assets/images/
+  - assets/icons/
   fonts:
     - family: CustomIcons
       fonts:

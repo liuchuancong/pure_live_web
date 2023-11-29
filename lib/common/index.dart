@@ -18,3 +18,5 @@ export 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:pure_live_web/routes/app_pages.dart';
 export 'package:easy_refresh/easy_refresh.dart';
+
+export 'package:pure_live_web/common/models/toggle_event.dart';
