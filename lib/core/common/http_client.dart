@@ -15,7 +15,7 @@ class HttpClient {
   HttpClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'http://127.0.0.1:25685',
+        baseUrl: '',
         connectTimeout: const Duration(seconds: 2),
       ),
     )..httpClientAdapter = HttpClientAdapter();
@@ -123,6 +123,38 @@ class HttpClient {
         throw CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0);
       } else {
         throw CoreError("发送POST请求失败");
+      }
+    }
+  }
+
+  Future<dynamic> postFile(
+    String url, {
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Map<String, dynamic>? header,
+    CancelToken? cancel,
+  }) async {
+    try {
+      queryParameters ??= {};
+      header ??= {};
+      data ??= {};
+      var result = await dio.post(
+        url,
+        queryParameters: queryParameters,
+        data: data,
+        options: Options(
+          headers: header,
+          contentType: Headers.multipartFormDataContentType,
+        ),
+        cancelToken: cancel,
+      );
+      return result.data;
+    } catch (e) {
+      if (e is DioException && e.type == DioExceptionType.badResponse) {
+        SmartDialog.showToast(CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0).toString());
+        throw CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0);
+      } else {
+        throw CoreError("上传文件失败");
       }
     }
   }

@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class HistoryPage extends GetView {
+class HistoryPage extends GetWidget {
   HistoryPage({super.key});
 
   final refreshController = EasyRefreshController(
@@ -11,21 +13,14 @@ class HistoryPage extends GetView {
   );
 
   Future onRefresh() async {
-    bool result = true;
-    final SettingsService settings = Get.find<SettingsService>();
-
-    for (final room in settings.historyRooms) {
-      try {
-        // var newRoom = await Sites.of(room.platform!).liveSite.getRoomDetail(roomId: room.roomId!);
-        // settings.updateRoomInHistory(newRoom);
-      } catch (e) {
-        result = false;
-      }
-    }
-    if (result) {
+    try {
+      final SettingsService settings = Get.find<SettingsService>();
+      var rooms = await SettingsRecover().getHistoryData();
+      settings.historyRooms.value = (rooms as List).map<LiveRoom>((e) => LiveRoom.fromJson(jsonDecode(e))).toList();
       refreshController.finishRefresh(IndicatorResult.success);
       refreshController.resetFooter();
-    } else {
+    } catch (e) {
+      print(e.toString());
       refreshController.finishRefresh(IndicatorResult.fail);
     }
   }

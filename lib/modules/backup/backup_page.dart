@@ -12,8 +12,6 @@ class BackupPage extends StatefulWidget {
 
 class _BackupPageState extends State<BackupPage> {
   final settings = Get.find<SettingsService>();
-  late String backupDirectory = settings.backupDirectory.value;
-  late String m3uDirectory = settings.m3uDirectory.value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,32 +28,14 @@ class _BackupPageState extends State<BackupPage> {
           ListTile(
             title: Text(S.of(context).create_backup),
             subtitle: Text(S.of(context).create_backup_subtitle),
-            onTap: () async {
-              final selectedDirectory = await FileRecoverUtils().createBackup(backupDirectory);
-              if (selectedDirectory != null) {
-                setState(() {
-                  backupDirectory = selectedDirectory;
-                });
-              }
+            onTap: () {
+              FileRecoverUtils().createBackup();
             },
           ),
           ListTile(
             title: Text(S.of(context).recover_backup),
             subtitle: Text(S.of(context).recover_backup_subtitle),
             onTap: () => FileRecoverUtils().recoverBackup(),
-          ),
-          SectionTitle(title: S.of(context).auto_backup),
-          ListTile(
-            title: Text(S.of(context).backup_directory),
-            subtitle: Text(backupDirectory),
-            onTap: () async {
-              final selectedDirectory = await FileRecoverUtils().selectBackupDirectory(backupDirectory);
-              if (selectedDirectory != null) {
-                setState(() {
-                  backupDirectory = selectedDirectory;
-                });
-              }
-            },
           ),
         ],
       ),
@@ -134,16 +114,17 @@ class _BackupPageState extends State<BackupPage> {
                   SmartDialog.showToast('请输入下载链接');
                   return;
                 }
-                // bool validate = FileRecoverUtils.isUrl(urlEditingController.text);
-                // if (!validate) {
-                //   SmartDialog.showToast('请输入正确的下载链接');
-                //   return;
-                // }
+                bool validate = FileRecoverUtils.isUrl(urlEditingController.text);
+                if (!validate) {
+                  SmartDialog.showToast('请输入正确的下载链接');
+                  return;
+                }
                 if (textEditingController.text.isEmpty) {
                   SmartDialog.showToast('请输入文件名');
                   return;
                 }
-
+                await FileRecoverUtils()
+                    .recoverNetworkM3u8Backup(urlEditingController.text, textEditingController.text);
                 Get.back();
               },
               child: const Text("确定"),
@@ -156,6 +137,7 @@ class _BackupPageState extends State<BackupPage> {
 
   importFile(String value) {
     if (value == '本地导入') {
+      FileRecoverUtils().recoverM3u8Backup();
       Navigator.of(context).pop();
     } else {
       Navigator.of(context).pop(false);

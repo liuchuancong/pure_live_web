@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/modules/areas/widgets/area_card.dart';
 import 'package:pure_live_web/modules/areas/areas_list_controller.dart';
@@ -14,6 +15,14 @@ class AreaGridView extends StatefulWidget {
 
 class _AreaGridViewState extends State<AreaGridView> with SingleTickerProviderStateMixin {
   late TabController tabController = TabController(length: widget.controller.list.length, vsync: this);
+
+  @override
+  void initState() {
+    tabController.addListener(() {
+      SettingsRecover().toggleTabevent(tabController.index, ToggleEvent.areaSubTab.name, tag: widget.tag);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -21,13 +21,9 @@ class AccountController extends GetxController {
         SmartDialog.showToast('退出账号失败');
       }
     } else {
-      final exited = await SettingsRecover().exitRoom();
-      if (exited) {
-        await const Duration(seconds: 1).delay();
-        var result = await SettingsRecover().toBiliBiliLogin();
-        if (!result) {
-          SmartDialog.showToast('打开登录页失败');
-        }
+      var result = await SettingsRecover().toBiliBiliLogin();
+      if (!result) {
+        SmartDialog.showToast('打开登录页失败');
       }
     }
   }

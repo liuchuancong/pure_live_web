@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:pure_live_web/api/setting.dart';
@@ -15,13 +16,7 @@ class RoomCard extends StatelessWidget {
   final bool dense;
 
   void onTap(BuildContext context) async {
-    final exited = await SettingsRecover().exitRoom();
-    if (exited) {
-      await const Duration(seconds: 1).delay();
-      SettingsRecover().playRoom(room);
-    } else {
-      SmartDialog.showToast('退出房间失败');
-    }
+    SettingsRecover().enterRoom(jsonEncode(room.toJson()));
   }
 
   void onLongPress(BuildContext context) {

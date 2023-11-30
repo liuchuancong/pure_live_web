@@ -27,12 +27,11 @@ class PopularController extends GetxController with GetSingleTickerProviderState
       }
 
       index = currentIndex;
+      SettingsRecover().toggleTabevent(index, ToggleEvent.hotTab.name);
       var controller = Get.find<PopularGridController>(tag: Sites().availableSites()[index].id);
-
       if (controller.list.isEmpty) {
         controller.loadData();
       }
-      SettingsRecover().toggleTabevent(index, ToggleEvent.hotTab.name);
     });
   }
 

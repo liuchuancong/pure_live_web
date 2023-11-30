@@ -70,6 +70,10 @@ dependencies:
   intl: ^0.18.0
   date_format: ^2.0.7
   logger: ^2.0.2+1
+  file_picker: ^6.1.1
+  download: ^1.0.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -111,9 +115,6 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
-    - family: PingFang
-      fonts:
-        - asset: assets/PingFangSC.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -83,7 +83,6 @@ class BasePageController<T> extends BaseController {
       pageEmpty.value = false;
       notLogin.value = false;
       pageLoadding.value = currentPage == 1;
-
       var result = await getData(currentPage, pageSize);
       //是否可以加载更多
       if (result.isNotEmpty) {

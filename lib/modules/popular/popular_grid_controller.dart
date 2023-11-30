@@ -11,7 +11,7 @@ class PopularGridController extends BasePageController<LiveRoom> {
 
   @override
   Future<List<LiveRoom>> getData(int page, int pageSize) async {
-    var result = await SettingsRecover().getTabData(site.id, ToggleEvent.hotTab.name);
-    return result.map((e) => LiveRoom.fromJson(jsonDecode(e))).toList();
+    var result = await SettingsRecover().getTabData(site.id, ToggleEvent.hotTab.name, page, pageSize);
+    return (jsonDecode(result) as List).map<LiveRoom>((e) => LiveRoom.fromJson(jsonDecode(e))).toList();
   }
 }

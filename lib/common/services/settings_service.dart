@@ -129,9 +129,6 @@ class SettingsService extends GetxController {
     });
 
     videoPlayerIndex.listen((value) {
-      if (value == 3) {
-        value = 2;
-      }
       videoPlayerIndex.value = value;
       PrefUtil.setInt('videoPlayerIndex', value);
     });
@@ -465,7 +462,7 @@ class SettingsService extends GetxController {
         json['danmakuFontBorder'] != null ? double.parse(json['danmakuFontBorder'].toString()) : 0.5;
     danmakuOpacity.value = json['danmakuOpacity'] != null ? double.parse(json['danmakuOpacity'].toString()) : 1.0;
     doubleExit.value = json['doubleExit'] ?? true;
-    videoPlayerIndex.value = json['videoPlayerIndex'];
+    videoPlayerIndex.value = json['videoPlayerIndex'] ?? 0;
     enableCodec.value = json['enableCodec'] ?? true;
     mergeDanmuRating.value = json['mergeDanmuRating'] != null ? double.parse(json['mergeDanmuRating'].toString()) : 0.0;
     bilibiliCookie.value = json['bilibiliCookie'] ?? '';

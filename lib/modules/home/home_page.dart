@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../search/search_page.dart';
 import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
+import 'package:pure_live_web/plugins/bottom_button.dart';
 import 'package:pure_live_web/modules/areas/areas_page.dart';
 import 'package:pure_live_web/modules/home/mobile_view.dart';
 import 'package:pure_live_web/modules/home/tablet_view.dart';
@@ -18,6 +19,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   Timer? _debounceTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Application.addOverlayEntry(10, MediaQuery.of(context).size.height / 4 * 3);
+      Application.callBlock = () {
+        SettingsRecover().exitRoom('');
+      };
+    });
+  }
 
   @override
   void dispose() {

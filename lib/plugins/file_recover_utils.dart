@@ -1,5 +1,14 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:html' as html;
+import 'package:get/get.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:flutter/foundation.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:pure_live_web/api/setting.dart';
+import 'package:pure_live_web/common/index.dart';
+import 'package:date_format/date_format.dart' hide S;
+// ignore_for_file: avoid_web_libraries_in_flutter
 
 class FileRecoverUtils {
   ///获取后缀
@@ -24,27 +33,85 @@ class FileRecoverUtils {
   }
 
   Future<bool> recoverNetworkM3u8Backup(String url, String fileName) async {
-    return false;
+    try {
+      if (kIsWeb) {
+        html.AnchorElement anchorElement = html.AnchorElement(href: url);
+        anchorElement.download = url;
+        anchorElement.click();
+        SnackBarUtil.success('下载成功,请手动导入');
+      }
+      return true;
+    } catch (e) {
+      SnackBarUtil.error('下载失败,请稍后再试');
+      return false;
+    }
   }
 
-  Future<bool> requestStoragePermission() async {
-    return true;
+  createBackup() async {
+    if (kIsWeb) {
+      final dateStr = formatDate(
+        DateTime.now(),
+        [yyyy, '-', mm, '-', dd, 'T', HH, '_', nn, '_', ss],
+      );
+      var blob = html.Blob(["data"], 'text/plain', 'native');
+      html.AnchorElement(
+        href: html.Url.createObjectUrlFromBlob(blob).toString(),
+      )
+        ..setAttribute("download", "purelive_$dateStr.txt")
+        ..click();
+    }
   }
 
-  Future<String?> createBackup(String backupDirectory) async {}
+  void recoverBackup() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      dialogTitle: S.of(Get.context!).select_recover_file,
+      type: FileType.custom,
+      allowedExtensions: ['txt'],
+    );
+    PlatformFile file = result!.files.first;
+    try {
+      final formData = dio.FormData.fromMap({
+        'name': file.name,
+        'date': DateTime.now().toIso8601String(),
+        'file': dio.MultipartFile.fromBytes(file.bytes as List<int>),
+      });
 
-  void recoverBackup() async {}
+      SettingsRecover().uploadFile(formData, 'uploadRecoverFile');
+      SnackBarUtil.success(S.of(Get.context!).recover_backup_success);
+    } catch (e) {
+      SnackBarUtil.error(S.of(Get.context!).recover_backup_failed);
+    }
+  }
 
   // 选择备份目录
   Future<String?> selectBackupDirectory(String backupDirectory) async {
-    return '';
+    final settings = Get.find<SettingsService>();
+    String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+    if (selectedDirectory == null) return null;
+    settings.backupDirectory.value = selectedDirectory;
+    return selectedDirectory;
   }
 
   Future<bool> recoverM3u8Backup() async {
-    return false;
-  }
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      dialogTitle: S.of(Get.context!).select_recover_file,
+      type: FileType.custom,
+      allowedExtensions: ['m3u'],
+    );
+    PlatformFile file = result!.files.first;
+    try {
+      final formData = dio.FormData.fromMap({
+        'name': file.name,
+        'date': DateTime.now().toIso8601String(),
+        'file': dio.MultipartFile.fromBytes(file.bytes as List<int>),
+      });
 
-  Future<bool> recoverM3u8BackupByShare(media) async {
-    return false;
+      SettingsRecover().uploadFile(formData, 'uploadM3u8File');
+      SnackBarUtil.success(S.of(Get.context!).recover_backup_success);
+      return true;
+    } catch (e) {
+      SnackBarUtil.error(S.of(Get.context!).recover_backup_failed);
+      return false;
+    }
   }
 }

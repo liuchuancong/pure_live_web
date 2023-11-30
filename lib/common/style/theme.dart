@@ -12,23 +12,16 @@ class MyTheme {
 
   get lightThemeData {
     return ThemeData(
-      useMaterial3: true,
-      colorSchemeSeed: primaryColor,
-      colorScheme: colorScheme,
-      brightness: Brightness.light,
-      fontFamily: 'PingFang',
-    );
+        useMaterial3: true, colorSchemeSeed: primaryColor, colorScheme: colorScheme, brightness: Brightness.light);
   }
 
   get darkThemeData {
     return ThemeData(
-      useMaterial3: true,
-      colorSchemeSeed: primaryColor,
-      colorScheme: colorScheme?.copyWith(
-        error: const Color.fromARGB(255, 255, 99, 71),
-      ),
-      brightness: Brightness.dark,
-      fontFamily: 'PingFang',
-    );
+        useMaterial3: true,
+        colorSchemeSeed: primaryColor,
+        colorScheme: colorScheme?.copyWith(
+          error: const Color.fromARGB(255, 255, 99, 71),
+        ),
+        brightness: Brightness.dark);
   }
 }

@@ -3,6 +3,7 @@ import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/plugins/global.dart';
 import 'common/services/bilibili_account_service.dart';
+import 'package:pure_live_web/plugins/bottom_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main(List<String> args) async {
@@ -11,6 +12,7 @@ void main(List<String> args) async {
   // 初始化服务
   initService();
   initRefresh();
+  Application.initKey();
   runApp(const MyApp());
 }
 
@@ -18,7 +20,8 @@ void initService() async {
   Get.put(AuthController());
   Get.put(SettingsService());
   Get.put(FavoriteController());
-
+  Get.put(PopularController());
+  Get.put(AreasController());
   Get.put(BiliBiliAccountService());
 }
 
@@ -35,6 +38,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    initData();
   }
 
   initData() async {
@@ -49,13 +53,10 @@ class _MyAppState extends State<MyApp> {
       var darkTheme = MyTheme(primaryColor: themeColor).darkThemeData;
       return GetMaterialApp(
         title: '纯粹直播',
-        binds: [
-          Bind.lazyPut(() => PopularController()),
-          Bind.lazyPut(() => AreasController()),
-        ],
         themeMode: SettingsService.themeModes[settings.themeModeName.value]!,
         theme: lightTheme,
         darkTheme: darkTheme,
+        navigatorKey: Application.globalKey,
         locale: SettingsService.languages[settings.languageName.value]!,
         navigatorObservers: [FlutterSmartDialog.observer],
         builder: FlutterSmartDialog.init(),

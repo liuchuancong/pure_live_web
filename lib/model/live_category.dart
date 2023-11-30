@@ -19,4 +19,9 @@ class LiveCategory {
       "children": children,
     });
   }
+
+  LiveCategory.fromJson(Map<String, dynamic> json)
+      : id = json['id'] ?? '',
+        children = (json['children'] as List).map((e) => LiveArea.fromJson(jsonDecode(e))).toList(),
+        name = json['name'] ?? '';
 }
