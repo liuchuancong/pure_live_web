@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 
 class SearchButton extends StatelessWidget {
@@ -7,7 +8,12 @@ class SearchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => Get.toNamed(RoutePath.kSearch),
+      onPressed: () async {
+        final res = await SettingsRecover().enterSearch();
+        if (res) {
+          Get.toNamed(RoutePath.kSearch);
+        }
+      },
       icon: const Icon(CustomIcons.search),
     );
   }

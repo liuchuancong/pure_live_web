@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
@@ -56,11 +57,9 @@ class SettingsService extends GetxController {
     });
 
     shieldList.listen((value) {
-      shieldList.value = value;
       PrefUtil.setStringList('shieldList', value);
     });
     hotAreasList.listen((value) {
-      hotAreasList.value = value;
       PrefUtil.setStringList('hotAreasList', value);
     });
     favoriteRooms.listen((rooms) {
@@ -75,7 +74,6 @@ class SettingsService extends GetxController {
     });
 
     backupDirectory.listen((String value) {
-      backupDirectory.value = value;
       PrefUtil.setString('backupDirectory', value);
     });
     onInitShutDown();
@@ -89,58 +87,55 @@ class SettingsService extends GetxController {
       PrefUtil.setInt('videoFitIndex', value);
     });
     hideDanmaku.listen((value) {
-      hideDanmaku.value = value;
       PrefUtil.setBool('hideDanmaku', value);
     });
 
     danmakuArea.listen((value) {
-      danmakuArea.value = value;
       PrefUtil.setDouble('danmakuArea', value);
     });
 
     danmakuSpeed.listen((value) {
-      danmakuSpeed.value = value;
       PrefUtil.setDouble('danmakuSpeed', value);
     });
 
     danmakuFontSize.listen((value) {
-      danmakuFontSize.value = value;
       PrefUtil.setDouble('danmakuFontSize', value);
     });
 
     danmakuFontBorder.listen((value) {
-      danmakuFontBorder.value = value;
       PrefUtil.setDouble('danmakuFontBorder', value);
     });
 
     danmakuOpacity.listen((value) {
-      danmakuOpacity.value = value;
       PrefUtil.setDouble('danmakuOpacity', value);
     });
 
     doubleExit.listen((value) {
-      doubleExit.value = value;
       PrefUtil.setBool('doubleExit', value);
     });
 
     enableCodec.listen((value) {
-      enableCodec.value = value;
       PrefUtil.setBool('enableCodec', value);
     });
 
     videoPlayerIndex.listen((value) {
-      videoPlayerIndex.value = value;
       PrefUtil.setInt('videoPlayerIndex', value);
     });
 
     bilibiliCookie.listen((value) {
-      bilibiliCookie.value = value;
       PrefUtil.setString('bilibiliCookie', value);
     });
 
     mergeDanmuRating.listen((value) {
-      mergeDanmuRating.value = value;
       PrefUtil.setDouble('mergeDanmuRating', value);
+    });
+    webPort.listen((value) {
+      PrefUtil.setString('webPort', value);
+    });
+
+    webPortEnable.listen((value) {
+      changeWebListen(webPort.value, value);
+      PrefUtil.setBool('webPortEnable ', value);
     });
   }
 
@@ -207,7 +202,9 @@ class SettingsService extends GetxController {
     "简体中文": const Locale.fromSubtags(languageCode: 'zh', countryCode: 'CN'),
   };
   final languageName = (PrefUtil.getString('language') ?? "简体中文").obs;
+  final webPort = (PrefUtil.getString('webPort') ?? "8008").obs;
 
+  final webPortEnable = (PrefUtil.getBool('webPortEnable') ?? false).obs;
   get language => SettingsService.languages[languageName.value]!;
 
   void changeLanguage(String value) {
@@ -273,6 +270,14 @@ class SettingsService extends GetxController {
     if (resolutions.indexWhere((e) => e == name) != -1) {
       preferResolution.value = name;
       PrefUtil.setString('preferResolution', name);
+    }
+  }
+
+  void changeWebListen(port, enable) {
+    try {
+      SettingsRecover().toggleWebServer(port, enable);
+    } catch (e) {
+      SmartDialog.showToast('打开故障,请稍后重试');
     }
   }
 
@@ -467,6 +472,8 @@ class SettingsService extends GetxController {
     mergeDanmuRating.value = json['mergeDanmuRating'] != null ? double.parse(json['mergeDanmuRating'].toString()) : 0.0;
     bilibiliCookie.value = json['bilibiliCookie'] ?? '';
     themeColorSwitch.value = json['themeColorSwitch'] ?? Colors.blue.hex;
+    webPort.value = json['webPort'] ?? '8008';
+    webPortEnable.value = json['webPortEnable'] ?? false;
     changeThemeMode(themeModeName.value);
     changeThemeColorSwitch(themeColorSwitch.value);
     changeLanguage(languageName.value);
@@ -474,6 +481,7 @@ class SettingsService extends GetxController {
     changePreferPlatform(preferPlatform.value);
     changeShutDownConfig(autoShutDownTime.value, enableAutoShutDownTime.value);
     changeAutoRefreshConfig(autoRefreshTime.value);
+    changeWebListen(webPort.value, webPortEnable.value);
   }
 
   Map<String, dynamic> toJson() {
@@ -512,6 +520,8 @@ class SettingsService extends GetxController {
 
     json['mergeDanmuRating'] = mergeDanmuRating.value;
     json['themeColorSwitch'] = themeColorSwitch.value;
+    json['webPort '] = webPort.value;
+    json['webPortEnable'] = webPortEnable.value;
     return json;
   }
 
@@ -545,7 +555,9 @@ class SettingsService extends GetxController {
       'bilibiliCookie': '',
       'shieldList': [],
       'mergeDanmuRating': 0.0,
-      "hotAreasList": []
+      "hotAreasList": [],
+      "webPortEnable": false,
+      "webPort": "8008"
     };
     return json;
   }

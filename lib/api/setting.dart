@@ -32,6 +32,11 @@ class SettingsRecover {
     return jsonDecode(result)['data'];
   }
 
+  Future enterSearch() async {
+    var result = await HttpClient.instance.postJson('/api/enterSearch');
+    return jsonDecode(result)['data'];
+  }
+
   Future enterRoom(String liveRoom) async {
     var result = await HttpClient.instance.postJson('/api/enterRoom', queryParameters: {'liveRoom': liveRoom});
     return jsonDecode(result)['data'];
@@ -60,13 +65,24 @@ class SettingsRecover {
 
   Future toggleTabevent(int index, String type, {String tag = ''}) async {
     var result = await HttpClient.instance
-        .postJson('/api/toggleHomeTab', queryParameters: {'index': index, 'type': type, 'tag': tag});
+        .postJson('/api/toggleTabevent', queryParameters: {'index': index, 'type': type, 'tag': tag});
     return jsonDecode(result)['data'];
   }
 
-  Future getTabData(String tag, String type, int page, int pageSize) async {
+  Future toggleWebServer(bool webPortEnable, String webPort) async {
     var result = await HttpClient.instance
-        .postJson('/api/getTabData', queryParameters: {'tag': tag, 'type': type, 'page': page, 'pageSize': pageSize});
+        .postJson('/api/toggleWebServer', queryParameters: {'webPortEnable': webPortEnable, 'webPort': webPort});
+    return jsonDecode(result)['data'];
+  }
+
+  Future restartApp() async {
+    var result = await HttpClient.instance.postJson('/api/restartApp');
+    return jsonDecode(result)['data'];
+  }
+
+  Future getGridData(String tag, String type, int page, int pageSize, {String keywords = ''}) async {
+    var result = await HttpClient.instance.postJson('/api/getGridData',
+        queryParameters: {'tag': tag, 'type': type, 'page': page, 'pageSize': pageSize, 'keywords': keywords});
     return jsonDecode(result)['data'];
   }
 

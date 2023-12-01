@@ -17,7 +17,7 @@ class AreaRoomsController extends BasePageController<LiveRoom> {
 
   @override
   Future<List<LiveRoom>> getData(int page, int pageSize) async {
-    var result = await SettingsRecover().getTabData(site.id, ToggleEvent.areaRoomsTab.name, page, pageSize);
+    var result = await SettingsRecover().getGridData(site.id, ToggleEvent.areaRoomsTab.name, page, pageSize);
     return (jsonDecode(result) as List).map<LiveRoom>((e) => LiveRoom.fromJson(jsonDecode(e))).toList();
   }
 }

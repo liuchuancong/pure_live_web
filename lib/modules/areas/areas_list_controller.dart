@@ -11,7 +11,7 @@ class AreasListController extends BasePageController<AppLiveCategory> {
 
   @override
   Future<List<AppLiveCategory>> getData(int page, int pageSize) async {
-    var result = await SettingsRecover().getTabData(site.id, ToggleEvent.areaTab.name, page, pageSize);
+    var result = await SettingsRecover().getGridData(site.id, ToggleEvent.areaTab.name, page, pageSize);
     return (jsonDecode(result) as List)
         .map<AppLiveCategory>((e) => AppLiveCategory.fromLiveCategory(LiveCategory.fromJson(e)))
         .toList();

@@ -1,1 +1,1 @@
-enum ToggleEvent { online, bottomTab, hotTab, areaTab, areaSubTab, areaRoomsTab }
+enum ToggleEvent { online, bottomTab, hotTab, areaTab, areaSubTab, areaRoomsTab, doSearch }

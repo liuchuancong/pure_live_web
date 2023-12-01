@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import '../../core/sites.dart';
 import 'search_list_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:pure_live_web/api/setting.dart';
+import 'package:pure_live_web/common/models/toggle_event.dart';
 
 class SearchController extends GetxController with GetSingleTickerProviderStateMixin {
   late TabController tabController;
@@ -22,6 +24,7 @@ class SearchController extends GetxController with GetSingleTickerProviderStateM
       if (controller.list.isEmpty && !controller.pageEmpty.value) {
         controller.refreshData();
       }
+      SettingsRecover().toggleTabevent(index, ToggleEvent.doSearch.name);
     });
   }
 

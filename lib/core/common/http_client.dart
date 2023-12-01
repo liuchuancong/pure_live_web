@@ -16,7 +16,9 @@ class HttpClient {
     dio = Dio(
       BaseOptions(
         baseUrl: '',
-        connectTimeout: const Duration(seconds: 2),
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+        sendTimeout: const Duration(seconds: 10),
       ),
     )..httpClientAdapter = HttpClientAdapter();
     dio.interceptors.add(CustomInterceptor());

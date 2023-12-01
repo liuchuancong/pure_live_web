@@ -20,17 +20,18 @@ class PopularController extends GetxController with GetSingleTickerProviderState
     );
     index = pIndex == -1 ? 0 : pIndex;
 
-    tabController.animation?.addListener(() {
+    tabController.animation?.addListener(() async {
       var currentIndex = (tabController.animation?.value ?? 0).round();
       if (index == currentIndex) {
         return;
       }
-
       index = currentIndex;
-      SettingsRecover().toggleTabevent(index, ToggleEvent.hotTab.name);
-      var controller = Get.find<PopularGridController>(tag: Sites().availableSites()[index].id);
-      if (controller.list.isEmpty) {
-        controller.loadData();
+      final res = await SettingsRecover().toggleTabevent(index, ToggleEvent.hotTab.name);
+      if (res) {
+        var controller = Get.find<PopularGridController>(tag: Sites().availableSites()[index].id);
+        if (controller.list.isEmpty) {
+          controller.loadData();
+        }
       }
     });
   }

@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:pure_live_web/core/sites.dart';
+import 'package:pure_live_web/api/setting.dart';
+import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/common/base/base_controller.dart';
 
 class SearchListController extends BasePageController {
@@ -22,8 +24,9 @@ class SearchListController extends BasePageController {
 
   @override
   Future<List> getData(int page, int pageSize) async {
-    if (keyword.isEmpty) {}
-    return [];
+    var result =
+        await SettingsRecover().getGridData(site.id, ToggleEvent.doSearch.name, page, pageSize, keywords: keyword);
+    return (jsonDecode(result) as List).map<LiveRoom>((e) => LiveRoom.fromJson(jsonDecode(e))).toList();
   }
 
   void clear() {

@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
-import 'package:pure_live_web/routes/app_navigation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pure_live_web/modules/search/search_list_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -56,7 +57,7 @@ class _OwnerCardState extends State<OwnerCard> {
   SettingsService settings = Get.find<SettingsService>();
 
   void _onTap(BuildContext context) async {
-    AppNavigator.toLiveRoomDetail(liveRoom: widget.room);
+    SettingsRecover().enterRoom(jsonEncode(widget.room.toJson()));
   }
 
   late bool isFavorite = settings.isFavorite(widget.room);
