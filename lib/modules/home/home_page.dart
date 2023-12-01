@@ -24,11 +24,16 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Application.addOverlayEntry(10, MediaQuery.of(context).size.height / 4 * 3);
-      Application.callBlock = () {
-        SettingsRecover().exitRoom('');
-      };
+      insetOverLay();
     });
+  }
+
+  insetOverLay() async {
+    await const Duration(seconds: 1).delay();
+    Application.addOverlayEntry(10, MediaQuery.of(Get.context!).size.height / 4 * 3);
+    Application.callBlock = () {
+      SettingsRecover().exitRoom('');
+    };
   }
 
   @override

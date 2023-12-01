@@ -16,4 +16,5 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 flutter run -d web-server --web-hostname 192.168.2.70 --web-port 64578
-flutter build web --web-renderer html --base-href /pure_live/ --no-tree-shake-iconsflutter build web --web-renderer html --base-href /pure_live/ --no-tree-shake-icons
+flutter build web --web-renderer html --base-href /pure_live/ --no-tree-shake-icons
+flutter build web --web-renderer html --base-href /pure_live/ --no-tree-shake-icons
