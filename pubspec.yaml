@@ -64,6 +64,8 @@ dependencies:
   dio: ^5.3.3
   battery_plus: ^4.1.0
   stop_watch_timer: ^3.0.2
+
+  flutter_launcher_icons: ^0.13.1
   # storage
   # utils
   get: ^5.0.0-release-candidate-5
@@ -87,18 +89,13 @@ dev_dependencies:
 
 # flutter pub run flutter_launcher_icons
 flutter_icons:
-  android: "ic_launcher"
-  ios: true
-  remove_alpha_ios: true
   image_path: assets/icons/icon.png
   adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: assets/icons/icon_foreground.png
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  windows:
+  web:
     generate: true
-    image_path: assets/icons/icon.png
-    icon_size: 48 # min:48, max:256, default: 48
-
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
