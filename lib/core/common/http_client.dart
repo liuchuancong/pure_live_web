@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'custom_interceptor.dart';
-import 'package:pure_live_web/common/index.dart';
 import 'package:pure_live_web/core/common/core_error.dart';
 
 class HttpClient {

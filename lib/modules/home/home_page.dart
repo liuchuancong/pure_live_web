@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   insetOverLay() async {
-    await const Duration(seconds: 1).delay();
+    await const Duration(seconds: 5).delay();
     Application.addOverlayEntry(10, MediaQuery.of(Get.context!).size.height / 4 * 3);
     Application.callBlock = () {
       SettingsRecover().exitRoom('');
