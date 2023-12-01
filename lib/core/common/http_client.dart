@@ -49,7 +49,6 @@ class HttpClient {
       return result.data;
     } catch (e) {
       if (e is DioException && e.type == DioExceptionType.badResponse) {
-        SmartDialog.showToast(CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0).toString());
         throw CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0).toString();
       } else {
         throw CoreError("发送GET请求失败");
@@ -82,7 +81,6 @@ class HttpClient {
       return result.data;
     } catch (e) {
       if (e is DioException && e.type == DioExceptionType.badResponse) {
-        SmartDialog.showToast(CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0).toString());
         throw CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0);
       } else {
         throw CoreError("发送GET请求失败");
@@ -121,7 +119,6 @@ class HttpClient {
       return result.data;
     } catch (e) {
       if (e is DioException && e.type == DioExceptionType.badResponse) {
-        SmartDialog.showToast(CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0).toString());
         throw CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0);
       } else {
         throw CoreError("发送POST请求失败");
@@ -153,7 +150,6 @@ class HttpClient {
       return result.data;
     } catch (e) {
       if (e is DioException && e.type == DioExceptionType.badResponse) {
-        SmartDialog.showToast(CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0).toString());
         throw CoreError(e.message ?? "", statusCode: e.response?.statusCode ?? 0);
       } else {
         throw CoreError("上传文件失败");

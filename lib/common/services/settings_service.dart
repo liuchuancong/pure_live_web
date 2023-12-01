@@ -275,7 +275,7 @@ class SettingsService extends GetxController {
 
   void changeWebListen(port, enable) {
     try {
-      SettingsRecover().toggleWebServer(port, enable);
+      SettingsRecover().toggleWebServer(enable, port);
     } catch (e) {
       SmartDialog.showToast('打开故障,请稍后重试');
     }
