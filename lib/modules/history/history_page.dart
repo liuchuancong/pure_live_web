@@ -20,7 +20,6 @@ class HistoryPage extends GetWidget {
       refreshController.finishRefresh(IndicatorResult.success);
       refreshController.resetFooter();
     } catch (e) {
-      print(e.toString());
       refreshController.finishRefresh(IndicatorResult.fail);
     }
   }
