@@ -462,32 +462,13 @@ class SettingsPage extends GetView<SettingsService> {
                       hintText: '端口地址(1-65535)',
                     ),
                   ),
-                  Obx(() => SwitchListTile(
-                        title: const Text('是否开启web服务'),
-                        value: controller.webPortEnable.value,
-                        activeColor: Theme.of(context).colorScheme.primary,
-                        onChanged: (bool value) {
-                          controller.webPortEnable.value = value;
-                          if (value) {
-                            Get.back();
-                          }
-                        },
-                      )),
                 ],
               ),
             ),
           ),
           actions: [
             TextButton(
-              onPressed: Get.back,
-              child: const Text("取消"),
-            ),
-            TextButton(
               onPressed: () async {
-                if (controller.webPortEnable.value) {
-                  SmartDialog.showToast('请先关闭web服务');
-                  return;
-                }
                 if (textEditingController.text.isEmpty) {
                   SmartDialog.showToast('请输入端口号');
                   return;
@@ -497,11 +478,21 @@ class SettingsPage extends GetView<SettingsService> {
                   SmartDialog.showToast('请输入正确的端口号');
                   return;
                 }
+                if (int.parse(textEditingController.text) < 1 || int.parse(textEditingController.text) > 65535) {
+                  SmartDialog.showToast('请输入正确的端口号');
+                  return;
+                }
                 controller.webPort.value = textEditingController.text;
-                controller.webPortEnable.value = true;
-                Get.back();
+                SmartDialog.showToast('设置成功');
               },
               child: const Text("确定"),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.back();
+                SettingsRecover().closeWebServer();
+              },
+              child: const Text("关闭服务"),
             ),
           ],
         ),

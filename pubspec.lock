@@ -169,14 +169,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.3.4"
-  download:
-    dependency: "direct main"
-    description:
-      name: download
-      sha256: d3f39f5799913f61f84a2cfac8153a32fe71b7cd3d2282702886e6190f103c6a
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.0"
   easy_refresh:
     dependency: "direct main"
     description:
@@ -517,6 +509,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.4"
+  nice_buttons:
+    dependency: "direct main"
+    description:
+      name: nice_buttons
+      sha256: "280bcd1e7aa236f7f9acb213e75a6f9375d12094cc4aed03abb25ef0845331ce"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.3"
   octo_image:
     dependency: transitive
     description:

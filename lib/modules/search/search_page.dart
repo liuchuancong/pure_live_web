@@ -34,6 +34,7 @@ class SearchPage extends GetView<pure_live.SearchController> {
           },
         ),
         bottom: TabBar(
+          tabAlignment: TabAlignment.center,
           controller: controller.tabController,
           padding: EdgeInsets.zero,
           tabs: Sites().availableSites().map((e) => Tab(text: e.name)).toList(),

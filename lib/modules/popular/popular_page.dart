@@ -19,6 +19,7 @@ class PopularPage extends GetView<PopularController> {
           leading: showAction ? const MenuButton() : null,
           actions: showAction ? [const SearchButton()] : null,
           title: TabBar(
+            tabAlignment: TabAlignment.center,
             controller: controller.tabController,
             isScrollable: true,
             labelStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

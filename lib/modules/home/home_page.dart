@@ -29,10 +29,23 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   insetOverLay() async {
-    await const Duration(seconds: 1).delay();
-    Application.addOverlayEntry(10, MediaQuery.of(Get.context!).size.height / 4 * 3);
-    Application.callBlock = () {
-      SettingsRecover().exitRoom('');
+    await const Duration(seconds: 3).delay();
+    Application.addOverlayEntry(
+        MediaQuery.of(Get.context!).size.width / 4, MediaQuery.of(Get.context!).size.height / 4 * 3);
+    Application.callBlock = (String type) async {
+      switch (type) {
+        case 'back':
+          SettingsRecover().exitRoom('back');
+          break;
+        case 'favorite':
+          final res = await SettingsRecover().favoriteRoom();
+          SmartDialog.showToast(res);
+          break;
+        case 'fullscreen':
+          SettingsRecover().fullscreenRoom();
+          break;
+        default:
+      }
     };
   }
 

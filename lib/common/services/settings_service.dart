@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:pure_live_web/api/setting.dart';
 import 'package:pure_live_web/common/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
@@ -134,7 +133,6 @@ class SettingsService extends GetxController {
     });
 
     webPortEnable.listen((value) {
-      changeWebListen(webPort.value, value);
       PrefUtil.setBool('webPortEnable ', value);
     });
   }
@@ -270,14 +268,6 @@ class SettingsService extends GetxController {
     if (resolutions.indexWhere((e) => e == name) != -1) {
       preferResolution.value = name;
       PrefUtil.setString('preferResolution', name);
-    }
-  }
-
-  void changeWebListen(port, enable) {
-    try {
-      SettingsRecover().toggleWebServer(port, enable);
-    } catch (e) {
-      SmartDialog.showToast('打开故障,请稍后重试');
     }
   }
 
@@ -481,7 +471,6 @@ class SettingsService extends GetxController {
     changePreferPlatform(preferPlatform.value);
     changeShutDownConfig(autoShutDownTime.value, enableAutoShutDownTime.value);
     changeAutoRefreshConfig(autoRefreshTime.value);
-    changeWebListen(webPort.value, webPortEnable.value);
   }
 
   Map<String, dynamic> toJson() {
