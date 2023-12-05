@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:convert';
 import 'dart:html' as html;
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -60,7 +61,9 @@ class FileRecoverUtils {
         DateTime.now(),
         [yyyy, '-', mm, '-', dd, 'T', HH, '_', nn, '_', ss],
       );
-      var blob = html.Blob(["data"], 'text/plain', 'native');
+      final SettingsService service = Get.find<SettingsService>();
+
+      var blob = html.Blob([jsonEncode(service.toJson())], 'text/plain', 'native');
       html.AnchorElement(
         href: html.Url.createObjectUrlFromBlob(blob).toString(),
       )
