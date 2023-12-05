@@ -32,7 +32,6 @@ class _AreaGridViewState extends State<AreaGridView> with SingleTickerProviderSt
           tabAlignment: TabAlignment.center,
           controller: tabController,
           isScrollable: true,
-          tabAlignment: TabAlignment.center,
           indicatorSize: TabBarIndicatorSize.label,
           tabs: widget.controller.list.map<Widget>((e) => Tab(text: e.name)).toList(),
         ),
