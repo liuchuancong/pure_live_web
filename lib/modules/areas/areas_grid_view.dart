@@ -29,6 +29,7 @@ class _AreaGridViewState extends State<AreaGridView> with SingleTickerProviderSt
     return Column(
       children: [
         TabBar(
+          tabAlignment: TabAlignment.center,
           controller: tabController,
           isScrollable: true,
           tabAlignment: TabAlignment.center,

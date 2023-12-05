@@ -22,8 +22,18 @@ class SettingsRecover {
     return json.decode(result);
   }
 
+  Future favoriteRoom() async {
+    var result = await HttpClient.instance.postJson('/api/favoriteRoom');
+    return jsonDecode(result)['data'];
+  }
+
+  Future fullscreenRoom() async {
+    var result = await HttpClient.instance.postJson('/api/fullscreenRoom');
+    return jsonDecode(result)['data'];
+  }
+
   Future postFavoriteRooms() async {
-    var result = await HttpClient.instance.postJson('/api/postFavoriteRooms');
+    var result = await HttpClient.instance.postJson('/api/favoriteRoom');
     return jsonDecode(result)['data'];
   }
 
@@ -34,6 +44,12 @@ class SettingsRecover {
 
   Future enterSearch() async {
     var result = await HttpClient.instance.postJson('/api/enterSearch');
+    return jsonDecode(result)['data'];
+  }
+
+  Future closeWebServer() async {
+    var result =
+        await HttpClient.instance.postJson('/api/closeWebServer', queryParameters: {'webPort': service.webPort.value});
     return jsonDecode(result)['data'];
   }
 

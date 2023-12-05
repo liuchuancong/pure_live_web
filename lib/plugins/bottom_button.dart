@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
+import 'package:nice_buttons/nice_buttons.dart';
 import 'package:pure_live_web/common/index.dart';
 
-typedef CallBlock = void Function();
+typedef CallBlock = void Function(String);
 
 class Application {
   ///应用全局 key
@@ -39,65 +40,129 @@ class Application {
                   dy = details.offset.dy;
                   addOverlayEntry(dx, dy);
                 },
-
+                // HexColor(settingsService.themeColorSwitch.value)
                 ///feedback是拖动时跟随手指滑动的Widget。
-                feedback: ElevatedButton(
-                  onPressed: null,
-                  clipBehavior: Clip.antiAlias,
-                  style: ButtonStyle(
-                    //背景颜色
-                    backgroundColor: MaterialStateProperty.all(HexColor(settingsService.themeColorSwitch.value)),
-                    //字体颜色
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    // 阴影值
-                    elevation: MaterialStateProperty.all(10),
-                    //鼠标的样式，当悬停的时候，鼠标要显示为什么样的样式，比如下面的鼠标就会显示为等待加载的样式
-                    //shap,eleation 改变的动画时间
-                    animationDuration: const Duration(milliseconds: 200),
-
-                    //水波纹
-                    splashFactory: InkRipple.splashFactory,
-                    //字体样式
-                    textStyle: MaterialStateProperty.all(
-                      const TextStyle(fontWeight: FontWeight.bold),
+                feedback: Row(
+                  children: [
+                    NiceButtons(
+                      stretch: false,
+                      borderRadius: 60,
+                      borderThickness: 2,
+                      width: 60,
+                      startColor: HexColor(settingsService.themeColorSwitch.value),
+                      endColor: HexColor(settingsService.themeColorSwitch.value),
+                      borderColor: HexColor(settingsService.themeColorSwitch.value),
+                      gradientOrientation: GradientOrientation.Horizontal,
+                      onTap: (f) {
+                        callBlock!('back');
+                      },
+                      child: const Icon(
+                        Icons.reply_outlined,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      '返回',
-                      style: TextStyle(fontSize: 18),
+                    const SizedBox(
+                      width: 20,
                     ),
-                  ),
+                    NiceButtons(
+                      stretch: false,
+                      borderRadius: 60,
+                      borderThickness: 2,
+                      width: 60,
+                      startColor: HexColor(settingsService.themeColorSwitch.value),
+                      endColor: HexColor(settingsService.themeColorSwitch.value),
+                      borderColor: HexColor(settingsService.themeColorSwitch.value),
+                      gradientOrientation: GradientOrientation.Horizontal,
+                      onTap: (f) {
+                        callBlock!('favorite');
+                      },
+                      child: const Icon(
+                        Icons.favorite_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    NiceButtons(
+                      stretch: false,
+                      borderRadius: 60,
+                      borderThickness: 2,
+                      width: 60,
+                      startColor: HexColor(settingsService.themeColorSwitch.value),
+                      endColor: HexColor(settingsService.themeColorSwitch.value),
+                      borderColor: HexColor(settingsService.themeColorSwitch.value),
+                      gradientOrientation: GradientOrientation.Horizontal,
+                      onTap: (f) {
+                        callBlock!('fullscreen');
+                      },
+                      child: const Icon(
+                        Icons.fullscreen_outlined,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-
-                child: ElevatedButton(
-                  onPressed: callBlock,
-                  clipBehavior: Clip.antiAlias,
-                  focusNode: FocusNode(),
-                  style: ButtonStyle(
-                    //背景颜色
-                    backgroundColor: MaterialStateProperty.all(HexColor(settingsService.themeColorSwitch.value)),
-                    //字体颜色
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    // 阴影值
-                    elevation: MaterialStateProperty.all(8),
-                    //child的位置，
-                    alignment: Alignment.center,
-                    //水波纹
-                    splashFactory: InkRipple.splashFactory,
-                    //字体样式
-                    textStyle: MaterialStateProperty.all(
-                      const TextStyle(fontWeight: FontWeight.bold),
+                child: Row(
+                  children: [
+                    NiceButtons(
+                      stretch: false,
+                      borderRadius: 60,
+                      borderThickness: 2,
+                      width: 60,
+                      startColor: HexColor(settingsService.themeColorSwitch.value),
+                      endColor: HexColor(settingsService.themeColorSwitch.value),
+                      borderColor: HexColor(settingsService.themeColorSwitch.value),
+                      gradientOrientation: GradientOrientation.Horizontal,
+                      onTap: (f) {
+                        callBlock!('back');
+                      },
+                      child: const Icon(
+                        Icons.reply_outlined,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      '返回',
-                      style: TextStyle(fontSize: 18),
+                    const SizedBox(
+                      width: 20,
                     ),
-                  ),
+                    NiceButtons(
+                      stretch: false,
+                      borderRadius: 60,
+                      borderThickness: 2,
+                      width: 60,
+                      startColor: HexColor(settingsService.themeColorSwitch.value),
+                      endColor: HexColor(settingsService.themeColorSwitch.value),
+                      borderColor: HexColor(settingsService.themeColorSwitch.value),
+                      gradientOrientation: GradientOrientation.Horizontal,
+                      onTap: (f) {
+                        callBlock!('favorite');
+                      },
+                      child: const Icon(
+                        Icons.favorite_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    NiceButtons(
+                      stretch: false,
+                      borderRadius: 60,
+                      borderThickness: 2,
+                      width: 60,
+                      startColor: HexColor(settingsService.themeColorSwitch.value),
+                      endColor: HexColor(settingsService.themeColorSwitch.value),
+                      borderColor: HexColor(settingsService.themeColorSwitch.value),
+                      gradientOrientation: GradientOrientation.Horizontal,
+                      onTap: (f) {
+                        callBlock!('fullscreen');
+                      },
+                      child: const Icon(
+                        Icons.fullscreen_outlined,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ));
